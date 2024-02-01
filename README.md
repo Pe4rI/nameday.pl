@@ -1,2 +1,5 @@
 # nameday.sh
-A simple script that gives you notifications about who's got name day
+This script parses Azet.sk and prints data into notification.
+
+## Compatibility
+Should run fine on Linux and MacOS, make sure to set the variables in the file.
