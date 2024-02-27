@@ -16,7 +16,7 @@ sub notify{
     } elsif ($style eq "dunst") {
         #WIP
     } elsif ($style eq "notify-send") {
-        #WIP
+        system(qq{notify-send 'nameday.pl' '$_[1]'}); # if not working, insert notify-send's location
     } elsif ($style eq "custom") {
         system($custom);
     }
@@ -39,7 +39,8 @@ for (@names) {
 }
 
 # Used for debug
-# push(@names, "Andrea");
+# push(@names, "Test_name_1");
+# push(@names, "Test_name_2");
 # print "$string";
 # print "@names\n";
 # print scalar @names, "\n";
@@ -58,15 +59,12 @@ if (scalar @names == 0) {
     $notif_string = "Dnes majú meniny ";
     if (scalar @names > 2) {
         for(my $i = 0; $i < $#names - 1; $i++) {
-            $notif_string = $notif_string.$names[$i];
-            $notif_string = $notif_string.", ";
-
             $notif_title = $notif_title.$names[$i];
             $notif_title = $notif_title.", ";
         }
     }
-    $notif_string = $notif_string."$names[-2] a $names[-1]";
     $notif_title = $notif_title."$names[-2] a $names[-1]";
+    $notif_string = $notif_string.$notif_title;
 }
 
 # print "$notif_title";
