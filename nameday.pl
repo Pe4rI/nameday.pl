@@ -25,17 +25,26 @@ sub notify{
 # Downloads with curl
 my $string = `curl -s $url`;
 
-$string =~ s/\n/ /g;
-$string =~ s/\t/ /g;
+$string =~ s/[\n|\t|\r]/ /g;
+# print "$string";
 $string = (split /<ul class="head"/, $string) [1];
+# print "$string";
 $string = (split /ul>/, $string) [0];
+# print "$string";
 $string =~ s/<a/\n/g;
+#  print "----------------------------------\n";
+#  print "$string";
+#  print "\n----------------------------------\n";
 
 my @names = $string =~ m/href="\/meniny.*/g;
 
-for (@names) {
-    $_ = ($_ =~ m/>\w+</g)[0];
-    $_ =~ s/[\<|\>]//g;
+# print "@names\n";
+# print "----------------------------------\n";
+
+foreach my $temp (@names) {
+    $temp = (split /\>/, $temp)[1];
+    $temp = (split /\</, $temp)[0];
+    #print($temp);
 }
 
 # Used for debug
@@ -71,3 +80,4 @@ if (scalar @names == 0) {
 # print "$notif_string";
 
 notify($notif_title, $notif_string);
+
